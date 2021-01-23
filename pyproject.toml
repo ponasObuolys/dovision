@@ -2,7 +2,7 @@
 name = "doVision"
 version = "0.1.0"
 description = ""
-authors = ["Your Name <you@example.com>", "Jonas <satkusmedia@gmail.com>]
+authors = ["Your Name <you@example.com>", "Jonas <satkusmedia@gmail.com>"]
 
 [tool.poetry.dependencies]
 python = "^3.9"
