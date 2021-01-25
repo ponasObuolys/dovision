@@ -1,0 +1,17 @@
+image: python:3.9
+cache:
+  key: dependencies
+  paths:
+    - .cache/pip/
+    - .venv
+before_script:
+  - python --version
+  - pip install poetry
+  - poetry --version
+  - poetry config virtualenvs.in-project true
+  # https://github.com/python-poetry/poetry/issues/3199
+  - poetry config experimental.new-installer false
+  - poetry install -vv
+test:
+  script:
+    - poetry run py.test -vvxra --tb=short --cov=myproject --cov-report=term-missing tests
