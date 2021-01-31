@@ -5,7 +5,7 @@ description = ""
 authors = ["Aurimas <a.butvilauskas@gmail.com>", "Jonas <satkusmedia@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.8"
 Django = "^3.1.5"
 
 [tool.poetry.dev-dependencies]
@@ -13,6 +13,7 @@ pytest = "^5.2"
 django-stubs = "^1.7.0"
 pytest-django = "^4.1.0"
 pytest-cov = "^2.11.1"
+django-debug-toolbar = "^3.2"
 
 [build-system]
 requires = ["poetry-core>=1.0.0"]
