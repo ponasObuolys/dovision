@@ -15,7 +15,7 @@ class Task(models.Model):
 
 
 class TodoList(models.Model):
-    text = models.CharField(max_length=40)
+    text = models.CharField(max_length=350)
     complete = models.BooleanField(default=False)
 
     def __str__(self):
