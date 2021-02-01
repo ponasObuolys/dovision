@@ -29,11 +29,19 @@
                         <input class="form-control form-control-lg border-0 add-todo-input bg-transparent rounded" type="text" placeholder="Add new task">
                     </div>
                     <tr>
-                        <a class="btn btn-secondary" href="#" role="button">Add</a>
+                        <button class="taskAdd" name="taskAdd" type="submit">Add</button>
                     </tr>
                 </div>
             </div>
         </div>
+
+                <ul  class="taskList">
+
+                    {% for todo in todos %}
+                        <li>{{ todo.text }}</li>
+                    {% endfor %}
+
+                </ul>
     </div>
 
 </body>
