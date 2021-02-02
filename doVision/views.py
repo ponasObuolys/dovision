@@ -9,7 +9,7 @@ def index(request):
     return render(request, 'home.html', context=my_dict)
 
 
-def list(request):
+def list_view(request):
     todos = TodoList.objects.all()
     form = TodoListForm()
 
