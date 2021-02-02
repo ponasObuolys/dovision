@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import TodoList
 from .forms import TodoListForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -17,6 +18,8 @@ def list_view(request):
         form = TodoListForm(request.POST)
         if form.is_valid():
             form.save()
+        else:
+            messages.error(request, 'Error')
         return redirect('/')
     todos_dict = {'todos': todos, 'form': form}
     return render (request, 'home.html', context=todos_dict)
