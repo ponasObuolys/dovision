@@ -9,7 +9,6 @@ def index(request):
     my_dict = {'insert_tag': ''}
     return render(request, 'home.html', context=my_dict)
 
-
 def list(request):
     tasks = Task.objects.all()
     form = TaskForm()
@@ -23,7 +22,7 @@ def list(request):
     context = {'tasks': tasks, 'form': form}
     return render (request, 'home.html', context)
 
-def updateTask(request, pk):
+def updateTask(request, pk): # pk = primaty key
     task = Task.objects.get(id=pk)
     form = TaskForm(instance=task)
 
@@ -33,7 +32,14 @@ def updateTask(request, pk):
             form.save()
             return redirect('/')
 
-
     context = {'form':form}
-
     return render(request, 'update_task.html', context)
+
+def deleteTask(request, pk):
+    item = Task.objects.get(id=pk)
+    if request.method == "POST":
+        item.delete()
+        return redirect('/')
+
+    context = {'item':item}
+    return render(request, 'delete.html', context)
