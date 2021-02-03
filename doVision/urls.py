@@ -22,5 +22,6 @@ from . import views
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.list, name='TodoList'),
+    path('update_task/<str:pk>/', views.updateTask, name="update_task"),
     path('__debug__/', include(debug_toolbar.urls)),
 ]

@@ -23,14 +23,17 @@
 
             <form method="POST" action="/">
                 {% csrf_token %}
-                {{ form.text }}
+                {{ form.title }}
                 <input type="submit" name="Add Task">
             </form>
 
                 <ul  class="taskList">
 
-                    {% for todo in todos %}
-                        <li>{{ todo.text }}</li>
+                    {% for task in tasks %}
+                        <div>
+                            <a href="{% url 'update_task' task.id %}">Update</a>
+                            <li>{{ task }}</li>
+                        </div>
                     {% endfor %}
 
                 </ul>

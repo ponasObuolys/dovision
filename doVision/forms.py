@@ -1,11 +1,11 @@
 from django import forms
 from django.forms import ModelForm
 
-from .models import TodoList
+from .models import *
 
 
-class TodoListForm(forms.ModelForm):
+class TaskForm(forms.ModelForm):
 
     class Meta:
-        model = TodoList
+        model = Task
         fields = '__all__'
