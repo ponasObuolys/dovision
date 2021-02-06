@@ -1,5 +1,7 @@
 from django.shortcuts import render, redirect
 from .models import TodoList
+from .forms import TodoListForm
+from django.contrib import messages
 
 # Create your views here.
 
@@ -8,13 +10,16 @@ def index(request):
     return render(request, 'home.html', context=my_dict)
 
 
-def list(request):
-    todos = TodoList.objects.order_by('text')
-    todos_dict = {'todos': todos}
-    # if request.method == "POST":
-        # if "taskAdd" in request.POST:
-        #     title = request.POST['text']
-        #     Todo = TodoList(text=title, complete=False)
-        #     Todo.save()
-        #     return redirect("/")
+def list_view(request):
+    todos = TodoList.objects.all()
+    form = TodoListForm()
+
+    if request.method == 'POST':
+        form = TodoListForm(request.POST)
+        if form.is_valid():
+            form.save()
+        else:
+            messages.error(request, 'Error')
+        return redirect('/')
+    todos_dict = {'todos': todos, 'form': form}
     return render (request, 'home.html', context=todos_dict)

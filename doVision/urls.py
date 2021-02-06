@@ -21,6 +21,6 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', views.list, name='TodoList'),
+    path('', views.list_view, name='TodoList'),
     path('__debug__/', include(debug_toolbar.urls)),
 ]

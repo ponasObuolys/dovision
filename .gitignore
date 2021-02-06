@@ -2,4 +2,3 @@
 /.idea/
 /.pytest_cache/
 /.venv/
-/db.sqlite3
