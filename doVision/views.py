@@ -9,7 +9,7 @@ def index(request):
     my_dict = {'insert_tag': ''}
     return render(request, 'home.html', context=my_dict)
 
-def list(request):
+def listas(request):
     tasks = Task.objects.all()
     form = TaskForm()
 
