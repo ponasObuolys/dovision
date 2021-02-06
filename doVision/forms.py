@@ -1,7 +1,7 @@
 from django import forms
 from django.forms import ModelForm
 
-from .models import *
+from doVision.models import Task
 
 
 class TaskForm(forms.ModelForm):
