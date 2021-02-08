@@ -11,37 +11,44 @@
 <body>
     <div class="container">
         <div class="jumbotron">
+            {% block content %}
+            {% if user.is_authenticated %}
+            <h2 class="display-4">Hi {{ user.username }}!</h2>
+                <p><a class="btn btn-secondary btn-sm" href="{% url 'logout' %}">Log Out</a></p>
+            {% else %}
+                <p>You are not logged in <a class="btn btn-primary btn-sm" href="{% url 'login' %}">Log In</a></p>
+            {% endif %}
+
             <h1 class="display-4">Welcome to DoVision!</h1>
-            <p class="lead">This is a simple to do list app.</p>
+            <p class="lead">A simple to do list app.</p>
             <hr class="my-4">
             <p>You can choose what you want to do from items below:</p>
-            <tr>
-                <a class="btn btn-secondary" href="#" role="button">Clear ALL</a>
-                <a class="btn btn-secondary" href="#" role="button">About Us</a>
-            </tr>
+            {% endblock %}
             <p><br></p>
 
             <form method="POST" action="/">
                 {% csrf_token %}
                 {{ form.title }}
-                <input type="submit" name="Add Task">
+                <input class="btn btn-primary btn-sm" type="submit" name="Add Task">
+                <p><br></p>
             </form>
 
                 <ul  class="taskList">
 
                     {% for task in tasks %}
                         <div>
-                            <a href="{% url 'update_task' task.id %}">Update</a>
-                            <a href="{% url 'delete' task.id %}">Delete</a>
                             {% if task.completed == True %}
                             <strike>{{task}}</strike>
                             {% else %}
                             <span>{{task}}</span>
                             {% endif %}
+                            <a class="btn btn-secondary btn-sm" href="{% url 'update_task' task.id %}">Update</a>
+                            <a class="btn btn-secondary btn-sm" href="{% url 'delete' task.id %}">Delete</a>
                         </div>
                     {% endfor %}
 
                 </ul>
+        </div>
     </div>
 
 </body>
