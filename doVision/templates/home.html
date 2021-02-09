@@ -28,7 +28,7 @@
             <form method="POST" action="/">
                 {% csrf_token %}
                 {{ form.title }}
-                <input class="btn btn-primary btn-sm" type="submit" name="Add Task">
+                <input class="btn btn-primary btn-sm" style="margin-bottom: 5px" type="submit" name="Add Task">
             </form>
 
                 <ol class="taskList" style="line-height: 80%">
@@ -41,8 +41,8 @@
                                 {% if task.completed == True %}
                                 <strike>{{task}}</strike>
                                 {% else %}
-                                <span>{{task}}</span>
-                                    <span>{{ now }}</span>
+                                <span><strong>{{task}}</strong></span>
+                                    <span><em>{{ now }}</em></span>
                                 {% endif %}
                                 </li>
                         </div>
