@@ -22,32 +22,31 @@
             <h1 class="display-4">Welcome to DoVision!</h1>
             <p class="lead">A simple to do list app.</p>
             <hr class="my-4">
-            <p>You can choose what you want to do from items below:</p>
+            <p>Add new TODO task by pressing ENTER or Submit button:</p>
             {% endblock %}
-            <p><br></p>
 
             <form method="POST" action="/">
                 {% csrf_token %}
                 {{ form.title }}
                 <input class="btn btn-primary btn-sm" type="submit" name="Add Task">
-                <p><br></p>
             </form>
 
-                <ul  class="taskList">
-
+                <ol class="taskList" style="line-height: 80%">
                     {% for task in tasks %}
                         <div>
-                            {% if task.completed == True %}
-                            <strike>{{task}}</strike>
-                            {% else %}
-                            <span>{{task}}</span>
-                            {% endif %}
-                            <a class="btn btn-secondary btn-sm" href="{% url 'update_task' task.id %}">Update</a>
-                            <a class="btn btn-secondary btn-sm" href="{% url 'delete' task.id %}">Delete</a>
+                            <br>
+                                <li>
+                                <a class="btn btn-secondary btn-sm" href="{% url 'update_task' task.id %}">Update</a>
+                                <a class="btn btn-secondary btn-sm" href="{% url 'delete' task.id %}">Delete</a>
+                                {% if task.completed == True %}
+                                <strike>{{task}}</strike>
+                                {% else %}
+                                <span>{{task}}</span>
+                                {% endif %}
+                                </li>
                         </div>
                     {% endfor %}
-
-                </ul>
+                </ol>
         </div>
     </div>
 
