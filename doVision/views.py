@@ -1,7 +1,10 @@
+from datetime import timezone
+
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from doVision.models import Task
 from doVision.forms import TaskForm
+from django.utils.timezone import localdate, localtime
 
 # Create your views here.
 
@@ -12,6 +15,7 @@ def index(request):
 def listas(request):
     tasks = Task.objects.all()
     form = TaskForm()
+    now = localdate().strftime('%Y/%m/%d, %A')
 
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -19,7 +23,7 @@ def listas(request):
             form.save()
         return redirect('/')
 
-    context = {'tasks': tasks, 'form': form}
+    context = {'tasks': tasks, 'form': form, 'now': now}
     return render (request, 'home.html', context)
 
 def updateTask(request, pk): # pk = primaty key

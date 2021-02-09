@@ -24,30 +24,31 @@
             <hr class="my-4">
             <p>You can choose what you want to do from items below:</p>
             {% endblock %}
-            <p><br></p>
 
             <form method="POST" action="/">
                 {% csrf_token %}
                 {{ form.title }}
                 <input class="btn btn-primary btn-sm" type="submit" name="Add Task">
-                <p><br></p>
             </form>
 
-                <ul  class="taskList">
-
+                <ol  class="taskList">
                     {% for task in tasks %}
                         <div>
+                        <br>
+                            <li>
+                                <a class="btn btn-secondary btn-sm" href="{% url 'update_task' task.id %}">Update</a>
+                            <a class="btn btn-secondary btn-sm" href="{% url 'delete' task.id %}">Delete</a>
                             {% if task.completed == True %}
                             <strike>{{task}}</strike>
                             {% else %}
-                            <span>{{task}}</span>
+                            <span><b>{{task}}</b></span>
+                                <span><em> | Created at {{ now }}</em></span>
                             {% endif %}
-                            <a class="btn btn-secondary btn-sm" href="{% url 'update_task' task.id %}">Update</a>
-                            <a class="btn btn-secondary btn-sm" href="{% url 'delete' task.id %}">Delete</a>
+                            </li>
                         </div>
                     {% endfor %}
 
-                </ul>
+                </ol>
         </div>
     </div>
 
