@@ -1,6 +1,8 @@
 from django.db import models
 
 # Create your models here.
+
+
 class Task(models.Model):
     # task title. VARCHAR column in SQL DB
     title = models.CharField(max_length=350)
