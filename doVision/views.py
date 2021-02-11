@@ -1,7 +1,6 @@
 from datetime import timezone
 
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
 from doVision.models import Task
 from doVision.forms import TaskForm
 from django.utils.timezone import localdate, localtime
