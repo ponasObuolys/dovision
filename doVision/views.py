@@ -1,11 +1,11 @@
 from datetime import timezone
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponse
 from doVision.models import Task
 from doVision.forms import TaskForm
 from django.utils.timezone import localdate, localtime
-from django.db.models import Case, When
+from django.db.models import Case, When, F
 
 
 # Create your views here.
@@ -17,7 +17,7 @@ def index(request):
 
 
 def listas(request):
-    tasks = Task.objects.all()
+    tasks = Task.objects.order_by('-priority')
     form = TaskForm()
     now = localdate().strftime('%Y/%m/%d, %A')
 
@@ -25,7 +25,8 @@ def listas(request):
         form = TaskForm(request.POST)
         if form.is_valid():
             form.save()
-        return redirect('/')
+            return redirect('/')
+
 
     context = {'tasks': tasks, 'form': form, 'now': now}
     return render(request, 'home.html', context)
@@ -56,10 +57,13 @@ def deleteTask(request, pk):
 
 
 def prioritize(request, pk):
-    item = Task.objects.get(id=pk)
-    if request.method == 'POST':
-        item.id = 1
-        Task.objects.order_by('id')
+    get_object_or_404(Task, id=pk)
+    if request.method == 'GET':
+
+        Task.objects.filter(id=pk).update(priority=F('priority')+1)
+
         return redirect('/')
-    return render(request, 'home.html')
+    uzduotys = Task.objects.order_by('-priority')
+    context = {'uzduotys': uzduotys}
+    return render(request, 'home.html', context=context)
 

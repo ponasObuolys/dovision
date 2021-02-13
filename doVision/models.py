@@ -11,6 +11,7 @@ class Task(models.Model):
     # automatic datetime upon task creation
     created = models.DateTimeField(auto_now_add=True)
     # no primary key as Django model creates it automatically
+    priority = models.PositiveIntegerField(blank=True, default=0)
 
     def __str__(self):
         return self.title
