@@ -27,7 +27,7 @@
 
             <form method="POST" action="/">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form.title }}
                 <input class="btn btn-primary btn-sm" style="margin-bottom: 5px" type="submit" name="Add Task">
             </form>
 
