@@ -29,4 +29,5 @@ urlpatterns = [
     path('delete/<str:pk>/', views.deleteTask, name="delete"),
     path('__debug__/', include(debug_toolbar.urls)),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
+    path('', views.prioritize, name='priority'),
 ]

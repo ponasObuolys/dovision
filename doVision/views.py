@@ -5,6 +5,8 @@ from django.http import HttpResponse
 from doVision.models import Task
 from doVision.forms import TaskForm
 from django.utils.timezone import localdate, localtime
+from django.db.models import Case, When
+
 
 # Create your views here.
 
@@ -29,7 +31,7 @@ def listas(request):
     return render(request, 'home.html', context)
 
 
-def updateTask(request, pk):  # pk = primaty key
+def updateTask(request, pk):  # pk = primary key
     task = Task.objects.get(id=pk)
     form = TaskForm(instance=task)
 
@@ -51,3 +53,13 @@ def deleteTask(request, pk):
 
     context = {'item': item}
     return render(request, 'delete.html', context)
+
+
+def prioritize(request, pk):
+    item = Task.objects.get(id=pk)
+    if request.method == 'POST':
+        item.id = 1
+        Task.objects.order_by('id')
+        return redirect('/')
+    return render(request, 'home.html')
+

@@ -38,22 +38,12 @@
                             <li>
                                 <a class="btn btn-secondary btn-sm" href="{% url 'update_task' task.id %}">Update</a>
                                 <a class="btn btn-secondary btn-sm" href="{% url 'delete' task.id %}">Delete</a>
-<!--                                <a class="btn btn-secondary btn-sm" href="">Priority</a>-->
-<!--                                <div class="inputContainer half">-->
-                                <i class="fa fa-caret-down selectArrow"></i>
-                                <select id="category" class="taskCategory" name="category_select">
-                                    <option class="disabled" value="">Choose a priority</option>
-                                    <option>none</option>
-                                    <option>!</option>
-                                    <option>!!</option>
-                                    <option>!!!</option>
-                                </select>
-<!--                                </div>-->
                                 {% if task.completed == True %}
                                 <strike>{{task}}</strike>
                                 {% else %}
                                 <span><strong>{{task}}</strong></span>
                                 <span><em>{{ now }}</em></span>
+                                <a class="btn btn-outline-danger btn-sm" href="{% url 'priority' %}">Priority</a>
                                 {% endif %}
                             </li>
                         </div>
