@@ -4,4 +4,6 @@
     {% csrf_token %}
     {{form}}
     <input type="submit" name="Update Task">
+    <a href="{% url 'home' %}" >Cancel</a>
 </form>
+
