@@ -17,7 +17,7 @@ def index(request):
 
 
 def listas(request):
-    tasks = Task.objects.order_by('-prior')
+    tasks = Task.objects.order_by('-prior', '-created')
     form = TaskForm()
     now = localdate().strftime('%Y/%m/%d, %A')
 
@@ -57,18 +57,8 @@ def deleteTask(request, pk):
 
 
 def prioritize(request, pk):
-    get_object_or_404(Task, id=pk)
-    if request.method == 'GET': # and Task.objects.filter(id=pk) == False
-
-        # Task.objects.filter(id=pk).update(priority=F('priority')+1)
-        Task.objects.filter(id=pk).update(prior=True)
-
-        return redirect('/')
-    # else:
-    #     Task.objects.filter(id=pk).update(prior=False)
-    #     return redirect('/')
-
-    uzduotys = Task.objects.order_by('-prior')
-    context = {'uzduotys': uzduotys}
-    return render(request, 'home.html', context=context)
+    task = get_object_or_404(Task, id=pk)
+    task.prior = not task.prior
+    task.save()
+    return redirect('TodoList')
 
