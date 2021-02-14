@@ -17,7 +17,7 @@ def index(request):
 
 
 def listas(request):
-    tasks = Task.objects.order_by('-priority')
+    tasks = Task.objects.order_by('-prior')
     form = TaskForm()
     now = localdate().strftime('%Y/%m/%d, %A')
 
@@ -58,12 +58,17 @@ def deleteTask(request, pk):
 
 def prioritize(request, pk):
     get_object_or_404(Task, id=pk)
-    if request.method == 'GET':
+    if request.method == 'GET': # and Task.objects.filter(id=pk) == False
 
-        Task.objects.filter(id=pk).update(priority=F('priority')+1)
+        # Task.objects.filter(id=pk).update(priority=F('priority')+1)
+        Task.objects.filter(id=pk).update(prior=True)
 
         return redirect('/')
-    uzduotys = Task.objects.order_by('-priority')
+    # else:
+    #     Task.objects.filter(id=pk).update(prior=False)
+    #     return redirect('/')
+
+    uzduotys = Task.objects.order_by('-prior')
     context = {'uzduotys': uzduotys}
     return render(request, 'home.html', context=context)
 
