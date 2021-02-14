@@ -28,5 +28,6 @@ urlpatterns = [
     path('update_task/<str:pk>/', views.updateTask, name="update_task"),
     path('delete/<str:pk>/', views.deleteTask, name="delete"),
     path('__debug__/', include(debug_toolbar.urls)),
+    path('priority/<str:pk>/', views.prioritize, name='priority'),
     path('', TemplateView.as_view(template_name='home.html'), name='home'),
 ]

@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.test import Client
 import uuid
 
+
 @pytest.mark.django_db
 def test_django_view(client: Client):
     resp = client.get('/')
