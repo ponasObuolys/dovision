@@ -51,7 +51,7 @@
                                 {% else %}
                                 <span><strong>{{task}}</strong></span>
                                 <span><em>{{ now }}</em></span>
-                                <a class="btn btn-outline-danger btn-sm" href="{% url 'priority' task.id %}">Priority</a>
+                                <a class="btn btn-outline-danger btn-sm" href="{% url 'prior' task.id %}">Priority</a>
                                 {% endif %}
                             </li>
                         </div>
