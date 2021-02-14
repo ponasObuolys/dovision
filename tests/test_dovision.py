@@ -1,7 +1,13 @@
+from typing import List
+from typing import Tuple
+
 import pytest
 from django.contrib.auth.models import User
+
 from django.test import Client
-import uuid
+from django.urls import reverse
+
+from doVision.models import Task
 
 
 @pytest.mark.django_db
@@ -9,30 +15,73 @@ def test_django_view(client: Client):
     resp = client.get('/')
     assert resp.status_code == 200
 
-@pytest.fixture
-def test_password():
-    return 'strong-test-pass'
 
-@pytest.fixture
-def create_user(db, django_user_model, test_password):
-    def make_user(**kwargs):
-        kwargs['password'] = test_password
-        if 'username' not in kwargs:
-            kwargs['username'] = str(uuid.uuid4())
-        return django_user_model.objects.create_user(**kwargs)
-    return make_user
-
-@pytest.mark.django_db
-def test_user_create():
-  User.objects.create_user('useris', 'useris@gmail.com', 'slaptazodis')
-  assert User.objects.count() == 1
-
-def test_login(client, django_user_model):
-    username = "useris"
-    password = "slaptazodis"
-    user = django_user_model.objects.create_user(username=username, password=password)
-    client.force_login(user)
-
-def test_an_admin_view(admin_client):
+def test_an_admin_view(admin_client: Client):
     response = admin_client.get('/admin/')
     assert response.status_code == 200
+
+
+@pytest.mark.django_db
+def test_login(client: Client, django_user_model: User):
+    django_user_model.objects.create_user(
+        'test',
+        'test@example.com',
+        'secret',
+    )
+    resp = client.post('/accounts/login/', {
+        'username': 'test',
+        'password': 'secret',
+    })
+    assert resp.status_code == 302, resp.context['form'].errors.as_text()
+    assert resp['location'] == reverse('TodoList')
+
+
+def _list_tasks(tasks: List[Task]) -> List[Tuple[str, bool]]:
+    return [(t.title, t.prior) for t in tasks]
+
+
+@pytest.mark.django_db
+def test_priority(client: Client):
+    t1 = Task.objects.create(
+        title='Task1',
+        completed=False,
+        prior=False,
+    )
+
+    t2 = Task.objects.create(
+        title='Task2',
+        completed=False,
+        prior=False,
+    )
+
+    # Check task list
+    resp = client.post(reverse('TodoList'))
+    assert resp.status_code == 200
+    assert _list_tasks(resp.context['tasks']) == [
+        ('Task2', False),
+        ('Task1', False),
+    ]
+
+    # Prioritize first task
+    resp = client.get(reverse('prior', args=(t1.pk,)), follow=True)
+    assert resp.status_code == 200
+    assert _list_tasks(resp.context['tasks']) == [
+        ('Task1', True),
+        ('Task2', False),
+    ]
+
+    # Prioritize second task
+    resp = client.get(reverse('prior', args=(t2.pk,)), follow=True)
+    assert resp.status_code == 200
+    assert _list_tasks(resp.context['tasks']) == [
+        ('Task2', True),
+        ('Task1', True),
+    ]
+
+    # Deprioritize first task
+    resp = client.get(reverse('prior', args=(t1.pk,)), follow=True)
+    assert resp.status_code == 200
+    assert _list_tasks(resp.context['tasks']) == [
+        ('Task2', True),
+        ('Task1', False),
+    ]
