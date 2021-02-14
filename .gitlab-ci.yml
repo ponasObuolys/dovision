@@ -14,5 +14,5 @@ before_script:
   - poetry install -vv
 test:
   script:
-    - poetry run flake8 doVision tests
+    - poetry run flake8 doVision tests --ignore=E501
     - poetry run py.test -vvxra --tb=short --cov=myproject --cov-report=term-missing tests

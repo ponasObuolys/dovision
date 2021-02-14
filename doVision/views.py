@@ -1,11 +1,8 @@
-from datetime import timezone
-
-from django.shortcuts import render, redirect, get_object_or_404
-from django.http import HttpResponse
 from doVision.models import Task
 from doVision.forms import TaskForm
-from django.utils.timezone import localdate, localtime
-from django.db.models import Case, When, F
+
+from django.shortcuts import render, redirect, get_object_or_404
+from django.utils.timezone import localdate
 
 
 # Create your views here.
@@ -26,7 +23,6 @@ def listas(request):
         if form.is_valid():
             form.save()
             return redirect('/')
-
 
     context = {'tasks': tasks, 'form': form, 'now': now}
     return render(request, 'home.html', context)
@@ -61,4 +57,3 @@ def prioritize(request, pk):
     task.prior = not task.prior
     task.save()
     return redirect('TodoList')
-
