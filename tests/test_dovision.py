@@ -98,4 +98,3 @@ def test_add_task(client: Client):
     resp = client.post('')
     assert resp.status_code == 200
     assert resp.context['tasks'][0] == t1
-
