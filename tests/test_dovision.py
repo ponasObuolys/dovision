@@ -58,8 +58,8 @@ def test_priority(client: Client):
     resp = client.post(reverse('TodoList'))
     assert resp.status_code == 200
     assert _list_tasks(resp.context['tasks']) == [
-        ('Task2', False),
         ('Task1', False),
+        ('Task2', False),
     ]
 
     # Prioritize first task
@@ -74,8 +74,8 @@ def test_priority(client: Client):
     resp = client.get(reverse('prior', args=(t2.pk,)), follow=True)
     assert resp.status_code == 200
     assert _list_tasks(resp.context['tasks']) == [
-        ('Task2', True),
         ('Task1', True),
+        ('Task2', True),
     ]
 
     # Deprioritize first task
@@ -85,3 +85,16 @@ def test_priority(client: Client):
         ('Task2', True),
         ('Task1', False),
     ]
+
+
+@pytest.mark.django_db
+def test_add_task(client: Client):
+    t1 = Task.objects.create(
+        title='Task1',
+        completed=False,
+        prior=False,
+    )
+
+    resp = client.post('')
+    assert resp.status_code == 200
+    assert resp.context['tasks'][0] == t1
