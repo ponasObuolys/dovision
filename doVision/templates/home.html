@@ -48,6 +48,7 @@
 <!--                                </select>-->
                                 {% if task.completed == True %}
                                 <strike>{{task}}</strike>
+                                <span><em><strong>Completed at: </strong>{{ task.modified }}</em></span>
                                 {% else %}
                                 <span><strong>{{task}}</strong></span>
 
@@ -56,6 +57,7 @@
                                 <span><em>{{ task.created }}</em></span>
                                 {% endif %}
                                 <a class="btn btn-outline-success btn-sm" href="{% url 'completed' task.id %}">Completed</a>
+
                             </li>
                         </div>
                     {% endfor %}
