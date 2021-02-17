@@ -2,7 +2,7 @@
 
 <form method="POST" action="">
     {% csrf_token %}
-    {{form}}
+    <p>Task:{{form.title}}</p>
     <input type="submit" name="Update Task">
     <a href="{% url 'TodoList' %}" >Cancel</a>
 </form>
