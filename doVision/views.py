@@ -57,3 +57,10 @@ def prioritize(request, pk):
     task.prior = not task.prior
     task.save()
     return redirect('TodoList')
+
+
+def completed_task(request, pk):
+    task = get_object_or_404(Task, id=pk)
+    task.completed = not task.completed
+    task.save()
+    return redirect('TodoList')

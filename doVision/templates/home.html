@@ -50,9 +50,12 @@
                                 <strike>{{task}}</strike>
                                 {% else %}
                                 <span><strong>{{task}}</strong></span>
-                                <span><em>{{ now }}</em></span>
+
                                 <a class="btn btn-outline-danger btn-sm" href="{% url 'prior' task.id %}">Priority</a>
+
+                                <span><em>{{ now }}</em></span>
                                 {% endif %}
+                                <a class="btn btn-outline-success btn-sm" href="{% url 'completed' task.id %}">Completed</a>
                             </li>
                         </div>
                     {% endfor %}
