@@ -21,7 +21,7 @@ class Task(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        ''' On save, update timestamps '''
+        """ On save, update timestamps """
         if not self.pk:
             self.created = timezone.now()
         self.modified = timezone.now()
