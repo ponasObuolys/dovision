@@ -11,7 +11,7 @@ class Task(models.Model):
     completed = models.BooleanField(default=False)
     # automatic datetime upon task creation
     created = models.DateTimeField(editable=False)
-    modified = models.DateTimeField(auto_now=True)
+    modified = models.DateTimeField(auto_now=True)  # Viską sutvarkė auto_now=True
     # no primary key as Django model creates it automatically
     # priority = models.PositiveIntegerField(blank=True, default=0)
     # ?????
