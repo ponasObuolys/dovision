@@ -14,9 +14,9 @@
             {% block content %}
             {% if user.is_authenticated %}
             <h2 class="display-4">Hi {{ user.username }}!</h2>
-                <p><a class="btn btn-secondary btn-sm" href="{% url 'logout' %}">Log Out</a></p>
+                <p><a class="btn btn-secondary btn-sm" href="{% url 'logout' %}" title="Logout from your personalized TO DO list." style="text-decoration:none">Log Out</a></p>
             {% else %}
-                <p>You are not logged in <a class="btn btn-primary btn-sm" href="{% url 'login' %}">Log In</a>&nbsp;or&nbsp;<a class="btn btn-primary btn-sm" href="{% url 'signup' %}">Sign Up</a></p>
+                <p>You are not logged in <a class="btn btn-primary btn-sm" href="{% url 'login' %}" title="Login to your TO DO list." style="text-decoration:none">Log In</a>&nbsp;or&nbsp;<a class="btn btn-primary btn-sm" href="{% url 'signup' %}" title="Signup to DoVision." style="text-decoration:none">Sign Up</a></p>
             {% endif %}
 
             <h1 class="display-4">Welcome to DoVision!</h1>
@@ -28,7 +28,7 @@
             <form method="POST" action="/">
                 {% csrf_token %}
                 {{ form.title }}
-                <input class="btn btn-primary btn-sm" style="margin-bottom: 5px" type="submit" name="Add Task">
+                <input class="btn btn-primary btn-sm" style="margin-bottom: 5px" type="submit" name="Add Task" title="Submit your TO DO task to the list." style="text-decoration:none">
             </form>
 
                 <ol class="taskList" style="line-height: 80%">
@@ -36,8 +36,8 @@
                         <div>
                             <br>
                             <li>
-                                <a class="btn btn-secondary btn-sm" href="{% url 'update_task' task.id %}">Update</a>
-                                <a class="btn btn-secondary btn-sm" href="{% url 'delete' task.id %}">Delete</a>
+                                <a class="btn btn-secondary btn-sm" href="{% url 'update_task' task.id %}" title="Update your TO DO task." style="text-decoration:none">Update</a>
+                                <a class="btn btn-secondary btn-sm" href="{% url 'delete' task.id %}" title="Delete your TO DO task." style="text-decoration:none">Delete</a>
 <!--                                <i class="fa fa-caret-down selectArrow"></i>-->
 <!--                                <select id="category" class="taskCategory" name="category_select">-->
 <!--                                    <option class="disabled" value="">Choose a priority</option>-->
@@ -52,11 +52,11 @@
                                 {% else %}
                                 <span><strong>{{task}}</strong></span>
 
-                                <a class="btn btn-outline-danger btn-sm" href="{% url 'prior' task.id %}">Priority</a>
+                                <a class="btn btn-outline-danger btn-sm" href="{% url 'prior' task.id %}" title="Prioritize your TO DO task." style="text-decoration:none">Priority</a>
 
                                 <span><em><strong>Created: </strong>{{ task.created }}</em></span>
                                 {% endif %}
-                                <a class="btn btn-outline-success btn-sm" href="{% url 'completed' task.id %}">Completed</a>
+                                <a class="btn btn-outline-success btn-sm" href="{% url 'completed' task.id %}" title="Mark your TO DO task as COMPLETED." style="text-decoration:none">Completed</a>
 
                             </li>
                         </div>
