@@ -1,10 +1,12 @@
-{% block title %}Login{% endblock %}
+{% load static %}
 
 {% block content %}
+<h1>Welcome to <strong>DoVision!</strong></h1>
 <h2>Log In</h2>
 <form method="post">
   {% csrf_token %}
   {{ form.as_p }}
   <button type="submit" title="Login to your TO DO list." style="text-decoration:none">Log In</button>
 </form>
+<p>Don't have an account? Create one: <a class="btn btn-primary btn-sm" href="{% url 'signup' %}" title="Create an account" style="text-decoration:none">Sign up</a></p>
 {% endblock %}
