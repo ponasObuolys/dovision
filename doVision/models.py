@@ -11,7 +11,7 @@ class Task(models.Model):
     completed = models.BooleanField(default=False)
     # automatic datetime upon task creation
     created = models.DateTimeField(editable=False)
-    # modified = models.DateTimeField(editable=False)
+    modified = models.DateTimeField(auto_now=True)  # Viską sutvarkė auto_now=True
     # no primary key as Django model creates it automatically
     # priority = models.PositiveIntegerField(blank=True, default=0)
     # ?????
@@ -21,10 +21,10 @@ class Task(models.Model):
         return self.title
 
     def save(self, *args, **kwargs):
-        ''' On save, update timestamps '''
+        """ On save, update timestamps """
         if not self.pk:
             self.created = timezone.now()
-            self.modified = timezone.now()
+        self.modified = timezone.now()
         return super(Task, self).save(*args, **kwargs)
 
 
