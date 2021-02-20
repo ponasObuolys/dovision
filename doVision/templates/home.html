@@ -11,19 +11,17 @@
 <body>
     <div class="container">
         <div class="jumbotron">
-            {% block content %}
+{#            {% block content %}#}
             {% if user.is_authenticated %}
             <h2 class="display-4">Hi {{ user.username }}!</h2>
                 <p><a class="btn btn-secondary btn-sm" href="{% url 'logout' %}" title="Logout from your personalized TO DO list." style="text-decoration:none">Log Out</a></p>
-            {% else %}
-                <p>You are not logged in <a class="btn btn-primary btn-sm" href="{% url 'login' %}" title="Login to your TO DO list." style="text-decoration:none">Log In</a>&nbsp;or&nbsp;<a class="btn btn-primary btn-sm" href="{% url 'signup' %}" title="Signup to DoVision." style="text-decoration:none">Sign Up</a></p>
-            {% endif %}
+
 
             <h1 class="display-4">Welcome to DoVision!</h1>
             <p class="lead">A simple to do list app.</p>
             <hr class="my-4">
             <p>Add new TODO task by pressing ENTER or Submit button:</p>
-            {% endblock %}
+{#            {% endblock %}#}
 
             <form method="POST" action="/">
                 {% csrf_token %}
@@ -55,6 +53,9 @@
                         </div>
                     {% endfor %}
                 </ol>
+            {% else %}
+                <p>You are not logged in <a class="btn btn-primary btn-sm" href="{% url 'login' %}" title="Login to your TO DO list." style="text-decoration:none">Log In</a>&nbsp;or&nbsp;<a class="btn btn-primary btn-sm" href="{% url 'signup' %}" title="Signup to DoVision." style="text-decoration:none">Sign Up</a></p>
+            {% endif %}
         </div>
     </div>
 <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="dovision" data-description="Support me on Buy me a coffee!" data-message="" data-color="#5F7FFF" data-position="Left" data-x_margin="18" data-y_margin="18"></script>
