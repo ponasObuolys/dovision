@@ -14,6 +14,7 @@ def index(request):
     my_dict = {'insert_tag': ''}
     return render(request, 'home.html', context=my_dict)
 
+
 @login_required
 def listas(request):
     tasks = Task.objects.filter(user=request.user).order_by('-prior', '-created')
