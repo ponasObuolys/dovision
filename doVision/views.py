@@ -1,3 +1,5 @@
+from django.contrib.auth.decorators import login_required
+
 from doVision.models import Task
 from doVision.forms import TaskForm
 
@@ -12,16 +14,18 @@ def index(request):
     my_dict = {'insert_tag': ''}
     return render(request, 'home.html', context=my_dict)
 
-
+@login_required
 def listas(request):
-    tasks = Task.objects.order_by('-prior', '-created')
+    tasks = Task.objects.filter(user=request.user).order_by('-prior', '-created')
     form = TaskForm()
     now = localdate().strftime('%Y/%m/%d, %A')
 
     if request.method == 'POST':
         form = TaskForm(request.POST)
         if form.is_valid():
-            form.save()
+            task = form.save(commit=False)
+            task.user = request.user
+            task.save()
             return redirect('/')
 
     context = {'tasks': tasks, 'form': form, 'now': now}

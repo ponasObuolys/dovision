@@ -1,21 +1,16 @@
 from django.db import models
 from django.utils import timezone
-
-# Create your models here.
+from django.contrib.auth.models import User
 
 
 class Task(models.Model):
     # task title. VARCHAR column in SQL DB
     title = models.CharField(max_length=350)
-    # is task completed or not
     completed = models.BooleanField(default=False)
-    # automatic datetime upon task creation
     created = models.DateTimeField(editable=False)
     modified = models.DateTimeField(auto_now=True)  # Viską sutvarkė auto_now=True
-    # no primary key as Django model creates it automatically
-    # priority = models.PositiveIntegerField(blank=True, default=0)
-    # ?????
     prior = models.BooleanField(default=False)
+    user = models.ForeignKey(User, null=True, editable=False, on_delete=models.CASCADE)
 
     def __str__(self):
         return self.title
@@ -26,6 +21,13 @@ class Task(models.Model):
             self.created = timezone.now()
         self.modified = timezone.now()
         return super(Task, self).save(*args, **kwargs)
+    """
+    custom user task planas
+    """
+    # def update_task(self):
+    #     task = self.title
+    #     self.tasks = task
+    #     self.save()
 
 
 class TodoList(models.Model):
@@ -34,3 +36,6 @@ class TodoList(models.Model):
 
     def __str__(self):
         return self.text
+
+
+
