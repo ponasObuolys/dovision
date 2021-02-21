@@ -106,8 +106,6 @@ def test_add_task(client: Client, django_user_model: User):
 
     client.login(username='test', password='secret')
 
-
-
     resp = client.post('/', {'title': 'task1'}, follow=True)
 
     assert resp.status_code == 200
@@ -116,10 +114,8 @@ def test_add_task(client: Client, django_user_model: User):
     ]
 
 
-
 @pytest.mark.django_db
 def test_add_task_for_another_user(client: Client, django_user_model: User):
-
     user = django_user_model.objects.create_user(
         'test',
         'test@example.com',
@@ -134,10 +130,7 @@ def test_add_task_for_another_user(client: Client, django_user_model: User):
 
     client.login(username='hacker', password='secret')
 
-
-
     resp = client.post('/', {'title': 'task1', "user": user.pk}, follow=True)
-
     assert resp.status_code == 200
     assert _list_tasks(resp.context['tasks']) == [
         ('task1', False)

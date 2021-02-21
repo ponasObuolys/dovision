@@ -6,5 +6,6 @@
     {% csrf_token %}
     {{ form.as_p }}
     <button type="submit" title="Signup to DoVision." style="text-decoration:none">Sign Up</button>
+    <a href="{% url 'TodoList' %}" title="Go back to Home Page" style="text-decoration:none">Cancel</a>
   </form>
 {% endblock %}
