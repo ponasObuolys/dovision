@@ -96,13 +96,49 @@ def test_priority(client: Client, django_user_model: User):
 
 
 @pytest.mark.django_db
-def test_add_task(client: Client):
-    t1 = Task.objects.create(
-        title='Task1',
-        completed=False,
-        prior=False,
+def test_add_task(client: Client, django_user_model: User):
+
+    django_user_model.objects.create_user(
+        'test',
+        'test@example.com',
+        'secret',
     )
 
-    resp = client.post('')
+    client.login(username='test', password='secret')
+
+
+
+    resp = client.post('/', {'title': 'task1'}, follow=True)
+
     assert resp.status_code == 200
-    assert resp.context['tasks'][0] == t1
+    assert _list_tasks(resp.context['tasks']) == [
+        ('task1', False)
+    ]
+
+
+
+@pytest.mark.django_db
+def test_add_task_for_another_user(client: Client, django_user_model: User):
+
+    user = django_user_model.objects.create_user(
+        'test',
+        'test@example.com',
+        'secret',
+    )
+
+    django_user_model.objects.create_user(
+        'hacker',
+        'hacker@example.com',
+        'secret',
+    )
+
+    client.login(username='hacker', password='secret')
+
+
+
+    resp = client.post('/', {'title': 'task1', "user": user.pk}, follow=True)
+
+    assert resp.status_code == 200
+    assert _list_tasks(resp.context['tasks']) == [
+        ('task1', False)
+    ]
