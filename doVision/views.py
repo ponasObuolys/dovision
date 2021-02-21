@@ -17,7 +17,11 @@ def index(request):
 
 @login_required
 def listas(request):
-    tasks = Task.objects.filter(user=request.user).order_by('-prior', '-created')
+    tasks = (
+        Task.objects.
+        filter(user=request.user).
+        order_by('-prior', '-created')
+    )
     form = TaskForm()
     now = localdate().strftime('%Y/%m/%d, %A')
 
