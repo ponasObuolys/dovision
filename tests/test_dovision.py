@@ -13,7 +13,7 @@ from doVision.models import Task
 @pytest.mark.django_db
 def test_django_view(client: Client):
     resp = client.get('/')
-    assert resp.status_code == 200
+    assert resp.status_code == 302
 
 
 def test_an_admin_view(admin_client: Client):
@@ -41,7 +41,17 @@ def _list_tasks(tasks: List[Task]) -> List[Tuple[str, bool]]:
 
 
 @pytest.mark.django_db
-def test_priority(client: Client):
+def test_priority(client: Client, django_user_model: User):
+    django_user_model.objects.create_user(
+        'test',
+        'test@example.com',
+        'secret',
+    )
+    resp = client.post('/accounts/login/', {
+        'username': 'test',
+        'password': 'secret',
+    })
+
     t1 = Task.objects.create(
         title='Task1',
         completed=False,
@@ -56,7 +66,7 @@ def test_priority(client: Client):
 
     # Check task list
     resp = client.post(reverse('TodoList'))
-    assert resp.status_code == 200
+    assert resp.status_code == 302
     assert _list_tasks(resp.context['tasks']) == [
         ('Task1', False),
         ('Task2', False),
@@ -64,7 +74,7 @@ def test_priority(client: Client):
 
     # Prioritize first task
     resp = client.get(reverse('prior', args=(t1.pk,)), follow=True)
-    assert resp.status_code == 200
+    assert resp.status_code == 302
     assert _list_tasks(resp.context['tasks']) == [
         ('Task1', True),
         ('Task2', False),
@@ -72,7 +82,7 @@ def test_priority(client: Client):
 
     # Prioritize second task
     resp = client.get(reverse('prior', args=(t2.pk,)), follow=True)
-    assert resp.status_code == 200
+    assert resp.status_code == 302
     assert _list_tasks(resp.context['tasks']) == [
         ('Task1', True),
         ('Task2', True),
@@ -80,7 +90,7 @@ def test_priority(client: Client):
 
     # Deprioritize first task
     resp = client.get(reverse('prior', args=(t1.pk,)), follow=True)
-    assert resp.status_code == 200
+    assert resp.status_code == 302
     assert _list_tasks(resp.context['tasks']) == [
         ('Task2', True),
         ('Task1', False),
