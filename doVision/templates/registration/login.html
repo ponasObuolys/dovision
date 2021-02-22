@@ -8,5 +8,6 @@
   {{ form.as_p }}
   <button type="submit" title="Login to your TO DO list." style="text-decoration:none">Log In</button>
 </form>
+<p>Forgot your password? <a class="btn btn-primary btn-sm" href="{% url 'reset' %}" title="Reset password">Reset password</a></p>
 <p>Don't have an account? Create one: <a class="btn btn-primary btn-sm" href="{% url 'signup' %}" title="Create an account" style="text-decoration:none">Sign up</a></p>
 {% endblock %}
