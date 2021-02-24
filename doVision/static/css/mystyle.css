@@ -6,7 +6,13 @@ body {
     height: 100vh
 }
 
-.card {
+.cardUpdate {
+    width: 600px;
+    padding: 20px;
+    border: none;
+}
+
+.login_card {
     width: 400px;
     padding: 20px;
     border: none
