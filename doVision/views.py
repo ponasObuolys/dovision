@@ -23,7 +23,6 @@ def listas(request):
         order_by('-prior', '-created')
     )
     form = TaskForm()
-    now = localdate().strftime('%Y/%m/%d, %A')
 
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -33,7 +32,7 @@ def listas(request):
             task.save()
             return redirect('/')
 
-    context = {'tasks': tasks, 'form': form, 'now': now}
+    context = {'tasks': tasks, 'form': form}
     return render(request, 'home.html', context)
 
 
