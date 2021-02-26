@@ -1,7 +1,7 @@
 <!--NAUDOJAMA BOOTSTRAP VERSION 4.6! -->
 <!DOCTYPE html>
 {% load static %}
-<html lang="en">
+<html lang="en" xmlns="http://www.w3.org/1999/html">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/mystyle.css' %}" />
@@ -35,7 +35,7 @@
                             <br>
                             <li>
                                 <a class="btn btn-secondary btn-sm" href="{% url 'update_task' task.id %}" title="Update your TO DO task." style="text-decoration:none">Update</a>
-                                <a class="btn btn-secondary btn-sm" href="{% url 'delete' task.id %}" title="Delete your TO DO task." style="text-decoration:none">Delete</a>
+                                <a class="btn btn-secondary btn-sm" href="{% url 'delete' task.id %}" title="Delete your TO DO task." style="text-decoration:crimson">Delete</a>
 
                                 {% if task.completed == True %}
                                 <strike>{{task}}</strike>

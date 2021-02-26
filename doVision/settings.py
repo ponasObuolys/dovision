@@ -137,10 +137,8 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
     os.path.join(BASE_DIR, "static/css/mystyle.css"),
+    os.path.join(BASE_DIR, "static/js/template.js"),
 ]
 
 LOGIN_REDIRECT_URL = 'TodoList'
 LOGOUT_REDIRECT_URL = 'TodoList'
-
-EMAIL_BACKEND = "django.core.mail.backends.filebased.EmailBackend"
-EMAIL_FILE_PATH = str(BASE_DIR.joinpath('sent_emails'))
