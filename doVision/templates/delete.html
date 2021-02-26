@@ -1,10 +1,26 @@
-<p>Do you want to delete "{{item}}"?</p>
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
+    <title>Update Task</title>
+</head>
+<body>
 
-
-
-<form method="POST" action="">
-	{% csrf_token %}
-	<input type="submit" name="Confirm">
-    <a href="{% url 'TodoList' %}" >Cancel</a>
-</form>
+<div class="row">
+	<div class="col-md-9">
+        <div class="card cardUpdate">
+        <h3>Do you want to delete? <p style="color:Tomato;"> {{item}}</h3>
+            <form method="POST" action="">
+                {% csrf_token %}
+                <div class="md-3">
+                    <button type="submit" class="btn btn-primary btn-block">Confirm</button>
+                    <a class="btn btn-outline-primary btn-sm" href="{% url 'TodoList' %}" style="float: right; margin-top: 5px;" >Cancel</a>
+                </div>
+    </div>
+    </form>
+</div>
+</body>
 
