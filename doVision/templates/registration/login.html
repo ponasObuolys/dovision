@@ -34,8 +34,19 @@
     <p>Don't have an account? <a class="btn btn-outline-primary btn-block" href="{% url 'signup' %}"
                                  title="Create an account" style="text-decoration:none">Sign up</a></p>
     <div class="card login_card" style="width: auto;">
-        {% if form.errors %}
+        {% if form.non_field_errors %}
         <!-- Error messaging -->
+        <div id="errorsss">
+            <div class="inner">
+                <p>There were some errors in the information you entered. Please correct the following:</p>
+                <ul>
+                    {% for error in form.non_field_errors %}
+                    <li>{{ error|striptags }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        </div>
+        {% elif form.errors %}
         <div id="errors">
             <div class="inner">
                 <p>There were some errors in the information you entered. Please correct the following:</p>
@@ -48,7 +59,6 @@
                 </ul>
             </div>
         </div>
-        <!-- /Error messaging -->
         {% else %}
         <h5 class="text-center" style="font-size: 10px; margin-top: 5px">All rights reserved <span
                 style="font-size: 13px">©</span></h5>
