@@ -41,17 +41,18 @@
                                 {% if task.prior == False %}
                                 <a class="btn btn-outline-danger btn-sm" href="{% url 'prior' task.id %}" title="Prioritize your TO DO task." style="text-decoration:none">Priority</a>
                                 {% endif %}
+
                                 {% if task.completed == False %}
-                                <a class="btn btn-outline-success btn-sm" href="{% url 'completed' task.id %}" title="Mark your TO DO task as COMPLETED." style="text-decoration:none">Mark as Done</a>
+                                    <a class="btn btn-outline-success btn-sm" href="{% url 'completed' task.id %}" title="Mark your TO DO task as COMPLETED." style="text-decoration:none">Mark as Done</a>
                                 {% endif %}
 
                                 {% if task.prior == True %}
-                                    <a class="btn btn-outline-danger btn-sm" href="{% url 'prior' task.id %}" title="Prioritize your TO DO task." style="text-decoration:none">Deprioritize</a>
+                                    <a class="btn btn-danger btn-sm" href="{% url 'prior' task.id %}" title="Prioritize your TO DO task." style="text-decoration:none">Deprioritize</a>
                                 {% endif %}
 
                                 {% if task.completed == True %}
-                                <strike>{{task}}</strike>
-                                    <a class="btn btn-outline-success btn-sm" href="{% url 'completed' task.id %}" title="Mark your TO DO task as COMPLETED." style="text-decoration:none">Undone</a>
+                                        <strike>{{task}}</strike>
+                                    <a class="btn btn-success btn-sm" href="{% url 'completed' task.id %}" title="Mark your TO DO task as COMPLETED." style="text-decoration:none">Undone</a>
                                 <span><em>Completed on: {{ task.modified }}</em></span>
                                 {% else %}
                                 <span><strong>{{task}}</strong></span>
