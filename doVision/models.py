@@ -11,6 +11,7 @@ class Task(models.Model):
     modified = models.DateTimeField(auto_now=True)  # Viską sutvarkė auto_now=True
     prior = models.BooleanField(default=False)
     user = models.ForeignKey(User, null=True, editable=False, on_delete=models.CASCADE)
+    due_date = models.DateField(null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -21,18 +22,3 @@ class Task(models.Model):
             self.created = timezone.now()
         self.modified = timezone.now()
         return super(Task, self).save(*args, **kwargs)
-    """
-    custom user task planas
-    """
-    # def update_task(self):
-    #     task = self.title
-    #     self.tasks = task
-    #     self.save()
-
-
-class TodoList(models.Model):
-    text = models.CharField(max_length=350)
-    complete = models.BooleanField(default=False)
-
-    def __str__(self):
-        return self.text

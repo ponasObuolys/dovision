@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="{% static 'css/mystyle.css' %}" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
     <title>DoVision</title>
+  </script>
 </head>
 <body>
     <div class="container">
@@ -25,7 +26,8 @@
 
             <form method="POST" action="/">
                 {% csrf_token %}
-                {{ form.title }}
+                {{ form.as_p }}
+
                 <input class="btn btn-primary btn-sm" style="margin-bottom: 5px" type="submit" name="Add Task" title="Submit your TO DO task to the list." style="text-decoration:none">
             </form>
 
@@ -46,6 +48,9 @@
                                 <a class="btn btn-outline-danger btn-sm" href="{% url 'prior' task.id %}" title="Prioritize your TO DO task." style="text-decoration:none">Priority</a>
 
                                 <span><em><strong>Created: </strong>{{ task.created }}</em></span>
+                                    {% if task.due_date %}
+                                <span><em><strong>Due date: </strong>{{ task.due_date }}</em></span>
+                                    {% endif %}
                                 {% endif %}
                                 <a class="btn btn-outline-success btn-sm" href="{% url 'completed' task.id %}" title="Mark your TO DO task as COMPLETED." style="text-decoration:none">Completed</a>
 

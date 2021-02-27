@@ -7,9 +7,6 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.utils.timezone import localdate
 
 
-# Create your views here.
-
-
 def index(request):
     my_dict = {'insert_tag': ''}
     return render(request, 'home.html', context=my_dict)
