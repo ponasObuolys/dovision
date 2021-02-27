@@ -13,5 +13,6 @@ class TaskForm(forms.ModelForm):
             'due_date': DateInput(attrs={'type': 'date'}),
         }
 
+
 class DateInput(forms.DateInput):
     input_type = 'date'
