@@ -26,7 +26,8 @@
 
             <form method="POST" action="/">
                 {% csrf_token %}
-                {{ form.as_p }}
+                {{ form.title }}
+                {{ form.due_date }}
                 <input class="btn btn-primary btn-sm" style="margin-bottom: 5px" type="submit" name="Add Task" title="Submit your TO DO task to the list." style="text-decoration:none">
             </form>
 
