@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="jumbotron">
+        <div class="jumbotron ">
 {#            {% block content %}#}
             {% if user.is_authenticated %}
             <h2 class="display-4">Hi {{ user.username }}!</h2>
@@ -42,12 +42,12 @@
                                 <a class="btn btn-outline-danger btn-sm" href="{% url 'prior' task.id %}" title="Prioritize your TO DO task." style="text-decoration:none">Priority</a>
                                 {% endif %}
 
-                                {% if task.completed == False %}
-                                    <a class="btn btn-outline-success btn-sm" href="{% url 'completed' task.id %}" title="Mark your TO DO task as COMPLETED." style="text-decoration:none">Mark as Done</a>
-                                {% endif %}
-
                                 {% if task.prior == True %}
                                     <a class="btn btn-danger btn-sm" href="{% url 'prior' task.id %}" title="Prioritize your TO DO task." style="text-decoration:none">Deprioritize</a>
+                                {% endif %}
+
+                                {% if task.completed == False %}
+                                    <a class="btn btn-outline-success btn-sm" href="{% url 'completed' task.id %}" title="Mark your TO DO task as COMPLETED." style="text-decoration:none">Mark as Done</a>
                                 {% endif %}
 
                                 {% if task.completed == True %}
@@ -57,7 +57,7 @@
                                 {% else %}
                                 <span><strong>{{task}}</strong></span>
 
-                                <span><em>[Created on: {{ task.created }}]</em></span>
+                                <span><em>Created on: {{ task.created }}</em></span>
                                     {% if task.due_date %}
                                 <span><em><strong>Due date: </strong>{{ task.due_date }}</em></span>
                                     {% endif %}
