@@ -5,14 +5,14 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="{% static 'css/mystyle.css' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/css/bootstrap.min.css" integrity="sha384-B0vP5xmATw1+K9KRQjQERJvTumQW0nPEzvF6L/Z6nronJ3oUOFUFpCjEUQouq2+l" crossorigin="anonymous">
-    <title>Update Task</title>
+    <title>Delete Task</title>
 </head>
 <body>
 
 <div class="row">
 	<div class="col-md-9">
         <div class="card cardUpdate">
-        <h3>Do you want to delete? <p style="color:Tomato;"> {{item}}</h3>
+        <h3>Do you want to delete this task? <p class='card' style="margin-top: 15px; padding-top: 5px; padding-bottom: 5px; padding-left: 15px; font-size: 20px; background-color: #DCDCDC">{{item}}</h3>
             <form method="POST" action="">
                 {% csrf_token %}
                 <div class="md-3">
