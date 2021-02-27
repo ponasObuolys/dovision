@@ -12,12 +12,12 @@
 <div class="row">
 	<div class="col-md-9">
         <div class="card cardUpdate">
-        <h3>Do you want to delete this task? <p class='card' style="margin-top: 15px; padding-top: 5px; padding-bottom: 5px; padding-left: 15px; font-size: 20px; background-color: #DCDCDC">{{item}}</h3>
+        <h3>Do you want to delete this task? <p class='card' style="margin-top: 15px; padding-top: 5px; padding-bottom: 5px; padding-left: 15px; font-size: 20px;">{{item}}</h3>
             <form method="POST" action="">
                 {% csrf_token %}
                 <div class="md-3">
                     <button type="submit" class="btn btn-primary btn-block">Confirm</button>
-                    <a class="btn btn-outline-primary btn-sm" href="{% url 'TodoList' %}" style="float: right; margin-top: 5px;" >Cancel</a>
+                    <a class="btn btn-outline-primary btn-sm col-sm-4" href="{% url 'TodoList' %}" style="float: right; margin-top: 5px;" >Cancel</a>
                 </div>
     </div>
     </form>

@@ -10,6 +10,8 @@ body {
     width: 600px;
     padding: 20px;
     border: none;
+    background-image: url("https://images.pexels.com/photos/3694711/pexels-photo-3694711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-size: cover;
 }
 
 .login_card {
@@ -81,4 +83,9 @@ body {
     color: #fff;
     background-color: #4A148C;
     border-color: #4A148C
+}
+
+.jumbotron {
+    background-image: url("https://images.pexels.com/photos/3694711/pexels-photo-3694711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-size: cover;
 }
