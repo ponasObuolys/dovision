@@ -4,7 +4,6 @@ from doVision.models import Task
 from doVision.forms import TaskForm
 
 from django.shortcuts import render, redirect, get_object_or_404
-from django.utils.timezone import localdate
 
 
 def index(request):
@@ -20,7 +19,6 @@ def listas(request):
         order_by('-prior', '-created')
     )
     form = TaskForm()
-    now = localdate().strftime('%Y/%m/%d, %A')
 
     if request.method == 'POST':
         form = TaskForm(request.POST)
@@ -30,7 +28,7 @@ def listas(request):
             task.save()
             return redirect('/')
 
-    context = {'tasks': tasks, 'form': form, 'now': now}
+    context = {'tasks': tasks, 'form': form}
     return render(request, 'home.html', context)
 
 

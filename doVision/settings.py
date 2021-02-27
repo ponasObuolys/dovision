@@ -135,6 +135,7 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     STATIC_DIR,
     os.path.join(BASE_DIR, "static/css/mystyle.css"),
+    os.path.join(BASE_DIR, "static/js/template.js"),
 ]
 
 LOGIN_REDIRECT_URL = 'TodoList'
