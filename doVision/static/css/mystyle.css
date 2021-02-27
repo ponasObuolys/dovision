@@ -1,9 +1,29 @@
 body {
-    background-color: #eee;
+    background: url("../images/bg.jpg") no-repeat center center;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh
+}
+
+.jumbotron {
+    background: url("../images/bg.jpg") no-repeat center center;
+    -webkit-background-size: 100% 100%;
+    -moz-background-size: 100% 100%;
+    -o-background-size: 100% 100%;
+    background-size: 100% 100%;
+}
+
+.container {
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 
 .cardUpdate {
