@@ -1,5 +1,5 @@
 body {
-    background-color: #eee;
+    background-color: lightgrey;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,7 +10,7 @@ body {
     width: 600px;
     padding: 20px;
     border: none;
-    background-image: url("https://images.pexels.com/photos/3694711/pexels-photo-3694711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm31-jj-13-g-concrete_2.jpg?w=1300&dpr=1&fit=default&crop=default&q=80&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=c388574fc67c7381b0ea7deff09b864a");
     background-size: cover;
 }
 
@@ -86,6 +86,6 @@ body {
 }
 
 .jumbotron {
-    background-image: url("https://images.pexels.com/photos/3694711/pexels-photo-3694711.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+    background-image: url("https://img.rawpixel.com/s3fs-private/rawpixel_images/website_content/rm31-jj-13-g-concrete_2.jpg?w=1300&dpr=1&fit=default&crop=default&q=80&vib=3&con=3&usm=15&bg=F4F4F3&ixlib=js-2.2.1&s=c388574fc67c7381b0ea7deff09b864a");
     background-size: cover;
 }
