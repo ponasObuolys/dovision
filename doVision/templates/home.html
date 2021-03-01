@@ -12,17 +12,13 @@
 <body>
     <div class="container">
         <div class="jumbotron ">
-{#            {% block content %}#}
             {% if user.is_authenticated %}
-            <h2 class="display-4">Hi {{ user.username }}!</h2>
-                <p><a class="btn btn-secondary btn-sm" href="{% url 'logout' %}" title="Logout from your personalized TO DO list." style="text-decoration:none">Log Out</a></p>
-
+                <h6 class="display-4" style="float: right;">Hi {{ user.username }}!<a class="btn btn-secondary btn-sm" href="{% url 'logout' %}" title="Logout from your personalized TO DO list.">Log Out</a></h6>
 
             <h1 class="display-4">Welcome to DoVision!</h1>
             <p class="lead">A simple to do list app.</p>
             <hr class="my-4">
             <p>Add new TODO task by pressing ENTER or Submit button:</p>
-{#            {% endblock %}#}
 
             <form method="POST" action="/">
                 {% csrf_token %}
@@ -51,8 +47,9 @@
                                 {% endif %}
 
                                 {% if task.completed == True %}
-                                        <strike>{{task}}</strike>
                                     <a class="btn btn-success btn-sm" href="{% url 'completed' task.id %}" title="Mark your TO DO task as COMPLETED." style="text-decoration:none">Undone</a>
+                                        <strike>{{task}}</strike>
+
                                 <span><em>Completed on: {{ task.modified }}</em></span>
                                 {% else %}
                                 <span><strong>{{task}}</strong></span>
